@@ -6,13 +6,13 @@ REGION = "us-west-2"
 # ACCOUNT = os.environ["ACCOUNT_ID"]
 
 # get account id 
-ACCOUNT = os.popen("aws sts get-caller-identity | jq -r '.Account'").read()
+ACCOUNT = os.popen("aws sts get-caller-identity | jq -r '.Account'").read().strip()
 
 # delete all docker images
-os.system("sudo docker system prune -a")
+# os.system("sudo docker system prune -a")
 
 # build go-bedrock-app image
-os.system("sudo docker build -t go-bedrock-app . ")
+# os.system("sudo docker build -t go-bedrock-app . ")
 
 #  aws ecr login
 os.system(
