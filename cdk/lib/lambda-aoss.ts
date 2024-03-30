@@ -53,7 +53,7 @@ export class LambdaAossStack extends Stack {
       memorySize: 2048,
       timeout: Duration.seconds(300),
       code: aws_lambda.EcrImageCode.fromAssetImage(
-        path.join(__dirname, "./../lambda/lambda-index-aoss/")
+        path.join(__dirname, "./../lambda/")
       ),
       handler: aws_lambda.Handler.FROM_IMAGE,
       runtime: aws_lambda.Runtime.FROM_IMAGE,

@@ -10,6 +10,8 @@ import {
   BUCKET_NAME,
   BUCKET_ARN,
   ARN_PRINCIPAL_ACCESS_AOSS,
+  AOSS_DOMAIN,
+  AOSS_COLLECTION_ARN,
 } from "../config";
 import { GoBedrockService } from "../lib/service-go-bedrock";
 import { AOSSStack } from "../lib/aoss";
@@ -28,8 +30,8 @@ const aoss = new AOSSStack(app, "AmazonOpenSearchStack", {
 
 // create lambda indexing aoss collection
 new LambdaAossStack(app, "LambdaAossBedrockStack", {
-  opensearchDomain: ``,
-  aossCollectionArn: aoss.collection.ref,
+  opensearchDomain: AOSS_DOMAIN,
+  aossCollectionArn: AOSS_COLLECTION_ARN,
   bucketName: BUCKET_NAME,
   aossIndexName: "",
 });
