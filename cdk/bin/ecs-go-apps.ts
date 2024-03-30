@@ -12,6 +12,7 @@ import {
   ARN_PRINCIPAL_ACCESS_AOSS,
   AOSS_DOMAIN,
   AOSS_COLLECTION_ARN,
+  AOSS_INDEX_NAME,
 } from "../config";
 import { GoBedrockService } from "../lib/service-go-bedrock";
 import { AOSSStack } from "../lib/aoss";
@@ -33,7 +34,7 @@ new LambdaAossStack(app, "LambdaAossBedrockStack", {
   opensearchDomain: AOSS_DOMAIN,
   aossCollectionArn: AOSS_COLLECTION_ARN,
   bucketName: BUCKET_NAME,
-  aossIndexName: "demo",
+  aossIndexName: AOSS_INDEX_NAME,
 });
 
 // create ecs cluster
