@@ -3,7 +3,10 @@ import os
 
 # parameters
 REGION = "us-west-2"
-ACCOUNT = os.environ["ACCOUNT_ID"]
+# ACCOUNT = os.environ["ACCOUNT_ID"]
+
+# get account id 
+ACCOUNT = os.popen("aws sts get-caller-identity | jq -r '.Account'").read()
 
 # delete all docker images
 os.system("sudo docker system prune -a")
