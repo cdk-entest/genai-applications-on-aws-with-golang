@@ -452,3 +452,21 @@ cd golang-bedrock-demo-main
 go mod tidy
 go run .
 ```
+
+## Config File
+
+```ts
+export const VPC_ID = "";
+export const VPC_NAME = "";
+export const REGION = "us-west-2";
+export const BUCKET_ARN = "";
+export const BUCKET_NAME = "";
+export const AOSS_ARN = "";
+export const GO_BLOG_ACM_CERT_ARN = "";
+export const GO_BEDROCK_ACM_CERT_ARN = "";
+export const ECR_REPO_NAME = "go-bedrock-app";
+export const ARN_PRINCIPAL_ACCESS_AOSS = "";
+export const AOSS_INDEX_NAME = "demo";
+export const AOSS_DOMAIN = "";
+export const AOSS_COLLECTION_ARN = "";
+```
