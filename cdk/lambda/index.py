@@ -11,28 +11,10 @@ import os
 from datetime import datetime
 
 #
-INDEX = os.environ["AOSS_INDEX_NAME"] 
+INDEX = os.environ["AOSS_INDEX_NAME"]
 
 # chunk size
 CHUNK_SIZE = 1000
-
-#
-if "BUCKET" in os.environ:
-    pass
-else:
-    os.environ["BUCKET"] = "cdk-entest-video"
-
-# opensearch domain
-if "OPENSEARCH_DOMAIN" in os.environ:
-    pass
-else:
-    os.environ["OPENSEARCH_DOMAIN"] = (
-        "yvp6plo4ijurgy8ymhdg.us-east-1.aoss.amazonaws.com"
-    )
-    os.environ["REGION"] = "us-east-1"
-
-# bedrock client
-bedrock_client = boto3.client("bedrock-runtime", region_name="us-east-1")
 
 # s3 client
 s3_client = boto3.client("s3")
@@ -42,6 +24,9 @@ host = os.environ["OPENSEARCH_DOMAIN"]
 client = boto3.client("opensearchserverless")
 region = os.environ["REGION"]
 credentials = boto3.Session().get_credentials()
+
+# bedrock client
+bedrock_client = boto3.client("bedrock-runtime", region_name=region)
 
 # auth
 awsauth = AWS4Auth(
