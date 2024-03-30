@@ -11,7 +11,7 @@ import os
 from datetime import datetime
 
 #
-INDEX = "demo"
+INDEX = os.environ["AOSS_INDEX_NAME"] 
 
 # chunk size
 CHUNK_SIZE = 1000
