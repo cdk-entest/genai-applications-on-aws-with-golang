@@ -6,6 +6,7 @@ import {
   REGION,
   BUCKET_ANR,
   AOSS_ARN,
+  ECR_REPO_NAME,
   GO_BLOG_ACM_CERT_ARN,
 } from "../config";
 import { GoBedrockService } from "../lib/service-go-bedrock";
@@ -30,12 +31,13 @@ new GoBedrockService(app, "GoBedrockService", {
   cluster: cluster.cluster,
   vpcId: VPC_ID,
   vpcName: VPC_NAME,
+  // for https
   certificate: "",
-  ecrRepoName: "go-bedrock-app",
+  ecrRepoName: ECR_REPO_NAME,
   aossCollectionArn: AOSS_ARN,
   bucketArn: BUCKET_ANR,
   env: {
-    region: process.env.CDK_DEFAULT_REGION,
-    account: process.env.CDK_DEFAULT_ACCOUNT,
+    region: REGION,
+    account: ACCOUNT,
   },
 });
