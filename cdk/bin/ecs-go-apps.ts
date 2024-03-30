@@ -31,6 +31,7 @@ new LambdaAossStack(app, "LambdaAossBedrockStack", {
   opensearchDomain: ``,
   aossCollectionArn: aoss.collection.ref,
   bucketName: BUCKET_NAME,
+  aossIndexName: "",
 });
 
 // create ecs cluster

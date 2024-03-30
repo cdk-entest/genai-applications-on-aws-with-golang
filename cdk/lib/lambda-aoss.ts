@@ -7,6 +7,7 @@ interface LambdaAossProps extends StackProps {
   opensearchDomain: string;
   aossCollectionArn: string;
   bucketName: string;
+  aossIndexName: string;
 }
 
 export class LambdaAossStack extends Stack {
@@ -61,6 +62,7 @@ export class LambdaAossStack extends Stack {
         PYTHONPATH: "/var/task/package",
         REGION: this.region,
         BUCKET: props.bucketName,
+        AOSS_INDEX_NAME: props.aossIndexName,
       },
       role: role,
     });
