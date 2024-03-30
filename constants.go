@@ -1,3 +1,4 @@
 package main
 
-const AOSS_ENDPOINT = "https://yvp6plo4ijurgy8ymhdg.us-east-1.aoss.amazonaws.com"
+const REGION = "us-west-2"
+const AOSS_ENDPOINT = ""

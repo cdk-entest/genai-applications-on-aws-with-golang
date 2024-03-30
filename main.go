@@ -27,7 +27,7 @@ func init() {
 
 	// load aws credentials from profile demo using config
 	awsCfg, err := config.LoadDefaultConfig(context.Background(),
-		config.WithRegion("us-east-1"),
+		config.WithRegion(REGION),
 	)
 
 	if err != nil {
