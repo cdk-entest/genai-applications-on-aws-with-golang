@@ -62,7 +62,13 @@ export class GoBedrockService extends Stack {
     task.addToTaskRolePolicy(
       new aws_iam.PolicyStatement({
         effect: Effect.ALLOW,
-        resources: [`arn:aws:bedrock:${this.region}::foundation-model/*`],
+        resources: [
+          `arn:aws:bedrock:${this.region}::foundation-model/anthropic.claude-v2`,
+          `arn:aws:bedrock:${this.region}::foundation-model/anthropic.claude-3-haiku-20240307-v1:0`,
+          `arn:aws:bedrock:${this.region}::foundation-model/anthropic.claude-3-sonnet-20240229-v1:0`,
+          `arn:aws:bedrock:${this.region}::foundation-model/stability.stable-diffusion-xl-v1`,
+          `arn:aws:bedrock:${this.region}::foundation-model/amazon.titan-embed-text-v1`,
+        ],
         actions: [
           "bedrock:InvokeModel",
           "bedrock:InvokeModelWithResponseStream",
@@ -75,7 +81,7 @@ export class GoBedrockService extends Stack {
       new aws_iam.PolicyStatement({
         effect: Effect.ALLOW,
         resources: [`${props.bucketArn}/*`],
-        actions: ["s3:*"],
+        actions: ["s3:*GetObject", "s3:PutObject"],
       })
     );
 
