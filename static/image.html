@@ -135,6 +135,9 @@
 
           // base64 image data
           imageBase64 = e.target.result.split(",")[1];
+
+          console.log(imageBase64);
+
           image.style.display = "block";
         };
         reader.readAsDataURL(file);
