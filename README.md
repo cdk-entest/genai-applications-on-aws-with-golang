@@ -474,20 +474,20 @@ export const AOSS_COLLECTION_ARN = "";
 Example
 
 ```ts
-export const VPC_ID = "vpc-0e3707e783431580d";
+export const VPC_ID = "vpc-";
 export const VPC_NAME = "demo";
 export const REGION = "us-west-2";
-export const BUCKET_ARN = "arn:aws:s3:::gobedrock-01042024";
-export const BUCKET_NAME = "gobedrock-01042024";
+export const BUCKET_ARN = "arn:aws:s3:::";
+export const BUCKET_NAME = "";
 export const AOSS_ARN =
-  "arn:aws:aoss:us-west-2:708290254912:collection/21vd5zeh5d87izrnix93";
+  "arn:aws:aoss:us-west-2:$ACCOUNT_ID:collection/$AOSS_ID";
 export const GO_BLOG_ACM_CERT_ARN = "";
 export const GO_BEDROCK_ACM_CERT_ARN = "";
 export const ECR_REPO_NAME = "go-bedrock-app";
 export const ARN_PRINCIPAL_ACCESS_AOSS =
-  "arn:aws:iam::708290254912:user/WSControlPlaneUser";
+  "arn:aws:iam::$ACCOUNT_ID:user/WSControlPlaneUser";
 export const AOSS_INDEX_NAME = "demo";
-export const AOSS_DOMAIN = "21vd5zeh5d87izrnix93.us-west-2.aoss.amazonaws.com";
+export const AOSS_DOMAIN = "$AOSS_ID.us-west-2.aoss.amazonaws.com";
 export const AOSS_COLLECTION_ARN =
-  "arn:aws:aoss:us-west-2:708290254912:collection/21vd5zeh5d87izrnix93";
+  "arn:aws:aoss:us-west-2:$ACCOUNT_ID:collection/$AOSS_ID";
 ```
