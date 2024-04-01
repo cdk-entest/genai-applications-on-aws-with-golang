@@ -10,6 +10,8 @@ Video demo
 
 [![screencast thumbnail](./image/video.png)](https://d2cvlmmg8c0xrp.cloudfront.net/demo/go-bedrock-demo.mp4)
 
+![architecture-diagram](./assets/arch.png)
+
 This repo shows how to get started with Amazon Bedrock in golang through basic examples.
 
 - simple chat and prompt
