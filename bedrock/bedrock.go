@@ -1,4 +1,4 @@
-package main
+package bedrock
 
 import (
 	"bytes"
@@ -67,7 +67,7 @@ type Query struct {
 	Topic string `json:"topic"`
 }
 
-func HandleBedrockClaude2Chat(w http.ResponseWriter, r *http.Request) {
+func HandleBedrockClaude2Chat(w http.ResponseWriter, r *http.Request, BedrockClient *bedrockruntime.Client) {
 
 	const claudePromptFormat = "\n\nHuman: %s\n\nAssistant:"
 
@@ -145,7 +145,7 @@ func HandleBedrockClaude2Chat(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func HandleBedrockClaude3HaikuChat(w http.ResponseWriter, r *http.Request) {
+func HandleBedrockClaude3HaikuChat(w http.ResponseWriter, r *http.Request, BedrockClient *bedrockruntime.Client) {
 
 	// list of messages sent from frontend client
 	var request FrontEndRequest
@@ -221,7 +221,7 @@ func HandleBedrockClaude3HaikuChat(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func HandleHaikuImageAnalyzer(w http.ResponseWriter, r *http.Request) {
+func HandleHaikuImageAnalyzer(w http.ResponseWriter, r *http.Request, BedrockClient *bedrockruntime.Client) {
 
 	// data type request
 	type Message struct {
@@ -338,7 +338,7 @@ func HandleHaikuImageAnalyzer(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func TestHaiku() {
+func TestHaiku(BedrockClient * bedrockruntime.Client) {
 
 	fmt.Println("Hello")
 
@@ -415,3 +415,4 @@ func TestHaiku() {
 	}
 
 }
+

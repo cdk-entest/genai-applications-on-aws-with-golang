@@ -1,4 +1,4 @@
-package main
+package bedrock
 
 import (
 	"context"
@@ -10,6 +10,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime"
+	opensearch "github.com/opensearch-project/opensearch-go/v2"
 	"github.com/opensearch-project/opensearch-go/v2/opensearchapi"
 )
 
@@ -25,9 +26,10 @@ type AossResponse struct {
 	Hits Hits `json:"hits"`
 }
 
-func QueryAOSS(vec []float64) ([]string, error) {
+func QueryAOSS(vec []float64, AOSSClient *opensearch.Client) ([]string, error) {
 
 	// let query get all item in an index
+
 	// content := strings.NewReader(`{
 	//     "size": 10,
 	//     "query": {
@@ -109,11 +111,11 @@ func QueryAOSS(vec []float64) ([]string, error) {
 
 }
 
-func GetEmbedVector(qustion string) ([]float64, error) {
+func GetEmbedVector(question string, BedrockClient *bedrockruntime.Client) ([]float64, error) {
 
 	// create request body to titan model
 	body := map[string]interface{}{
-		"inputText": qustion,
+		"inputText": question,
 	}
 	bodyJson, err := json.Marshal(body)
 
@@ -164,7 +166,7 @@ func GetEmbedVector(qustion string) ([]float64, error) {
 	return values, nil
 }
 
-func HandleAOSSQuery(w http.ResponseWriter, r *http.Request) {
+func HandleAOSSQuery(w http.ResponseWriter, r *http.Request, AOSSClient *opensearch.Client, BedrockClient *bedrockruntime.Client) {
 
 	// data struct of request
 	var request struct {
@@ -183,14 +185,14 @@ func HandleAOSSQuery(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(query)
 
 	// convert query to embedding vector
-	vec, error := GetEmbedVector(query)
+	vec, error := GetEmbedVector(query, BedrockClient)
 
 	if error != nil {
 		fmt.Println(error)
 	}
 
 	// query opensearch
-	answers, error := QueryAOSS(vec)
+	answers, error := QueryAOSS(vec, AOSSClient)
 
 	if error != nil {
 		fmt.Println(error)
@@ -201,3 +203,5 @@ func HandleAOSSQuery(w http.ResponseWriter, r *http.Request) {
 		Messages []string `json:"Messages"`
 	}{Messages: answers})
 }
+
+
