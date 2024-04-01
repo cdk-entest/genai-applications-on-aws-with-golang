@@ -6,11 +6,11 @@ date: 25/03/2024
 
 ## Introduction
 
-** Video demo**
+**Video demo**
 
 [![screencast thumbnail](./image/video.png)](https://d2cvlmmg8c0xrp.cloudfront.net/demo/go-bedrock-demo.mp4)
 
-** Architecture **
+**Architecture**
 
 ![architecture-diagram](./assets/arch.png)
 
