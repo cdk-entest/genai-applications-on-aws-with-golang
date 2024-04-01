@@ -6,13 +6,13 @@ date: 25/03/2024
 
 ## Introduction
 
-_Video demo_
+** Video demo**
 
 [![screencast thumbnail](./image/video.png)](https://d2cvlmmg8c0xrp.cloudfront.net/demo/go-bedrock-demo.mp4)
 
-![architecture-diagram](./assets/arch.png)
+** Architecture **
 
-_Architecture _
+![architecture-diagram](./assets/arch.png)
 
 This repo shows how to get started with Amazon Bedrock in golang through basic examples.
 
