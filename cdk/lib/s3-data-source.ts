@@ -80,7 +80,7 @@ export class S3DataSourceStack extends Stack {
     });
 
     // s3 bucket
-    const bucket = new aws_s3.Bucket(this, "XXXXXX", {
+    const bucket = new aws_s3.Bucket(this, "S3BucketForDocuments", {
       bucketName: props.bucketName,
       removalPolicy: RemovalPolicy.DESTROY,
       autoDeleteObjects: true,
