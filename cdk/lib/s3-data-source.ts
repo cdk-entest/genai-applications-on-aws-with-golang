@@ -4,11 +4,11 @@ import {
   RemovalPolicy,
   Stack,
   StackProps,
-  aws_s3_notifications,
 } from "aws-cdk-lib";
 import * as aws_iam from "aws-cdk-lib/aws-iam";
 import * as aws_lambda from "aws-cdk-lib/aws-lambda";
 import * as aws_s3 from "aws-cdk-lib/aws-s3";
+import * as aws_s3_notifications from "aws-cdk-lib/aws-s3-notifications";
 import { Effect } from "aws-cdk-lib/aws-iam";
 import { Construct } from "constructs";
 import * as path from "path";
