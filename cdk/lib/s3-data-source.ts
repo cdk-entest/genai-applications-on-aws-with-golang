@@ -1,17 +1,29 @@
-import { Duration, Stack, StackProps, aws_iam, aws_lambda } from "aws-cdk-lib";
+import {
+  CfnOutput,
+  Duration,
+  RemovalPolicy,
+  Stack,
+  StackProps,
+  aws_s3_notifications,
+} from "aws-cdk-lib";
+import * as aws_iam from "aws-cdk-lib/aws-iam";
+import * as aws_lambda from "aws-cdk-lib/aws-lambda";
+import * as aws_s3 from "aws-cdk-lib/aws-s3";
 import { Effect } from "aws-cdk-lib/aws-iam";
 import { Construct } from "constructs";
 import * as path from "path";
 
-interface LambdaAossProps extends StackProps {
+interface S3DataSourceProps extends StackProps {
   opensearchDomain: string;
-  aossCollectionArn: string;
+  aossCollectionArn?: string;
   bucketName: string;
   aossIndexName: string;
 }
 
-export class LambdaAossStack extends Stack {
-  constructor(scope: Construct, id: string, props: LambdaAossProps) {
+export class S3DataSourceStack extends Stack {
+  public readonly role: aws_iam.Role;
+
+  constructor(scope: Construct, id: string, props: S3DataSourceProps) {
     super(scope, id, props);
 
     // role for lambda to read opensearch
@@ -42,13 +54,13 @@ export class LambdaAossStack extends Stack {
     role.addToPolicy(
       new aws_iam.PolicyStatement({
         effect: Effect.ALLOW,
-        resources: [props.aossCollectionArn],
+        resources: [`arn:aws:aoss:${this.region}:${this.account}:collection/*`],
         actions: ["aoss:APIAccessAll"],
       })
     );
 
     // lambda function to query opensearch
-    new aws_lambda.Function(this, "LamdaQueryOpenSearch", {
+    const lambda = new aws_lambda.Function(this, "LamdaQueryOpenSearch", {
       functionName: "LambdaIndexAossBedrock",
       memorySize: 2048,
       timeout: Duration.seconds(300),
@@ -66,5 +78,33 @@ export class LambdaAossStack extends Stack {
       },
       role: role,
     });
+
+    // s3 bucket
+    const bucket = new aws_s3.Bucket(this, "XXXXXX", {
+      bucketName: props.bucketName,
+      removalPolicy: RemovalPolicy.DESTROY,
+      autoDeleteObjects: true,
+    });
+
+    // s3 trigger lambda
+    bucket.addEventNotification(
+      aws_s3.EventType.OBJECT_CREATED,
+      new aws_s3_notifications.LambdaDestination(lambda),
+      {
+        prefix: "documents/",
+        suffix: ".pdf",
+      }
+    );
+
+    // removal policy
+    bucket.applyRemovalPolicy(RemovalPolicy.DESTROY);
+
+    // output
+    new CfnOutput(this, "RoleForLambdaIndexAossBedrockArn", {
+      value: role.roleArn,
+      description: "role of lambda indexing opensearch",
+    });
+
+    this.role = role;
   }
 }

@@ -4,37 +4,34 @@ import {
   VPC_ID,
   VPC_NAME,
   REGION,
-  AOSS_ARN,
   ECR_REPO_NAME,
-  GO_BLOG_ACM_CERT_ARN,
   BUCKET_NAME,
   BUCKET_ARN,
-  ARN_PRINCIPAL_ACCESS_AOSS,
+  PARTICIPANT_ROLE_ARN,
   AOSS_DOMAIN,
-  AOSS_COLLECTION_ARN,
   AOSS_INDEX_NAME,
+  AOSS_COLLECTION_ARN,
 } from "../config";
 import { GoBedrockService } from "../lib/service-go-bedrock";
 import { AOSSStack } from "../lib/aoss";
-import { LambdaAossStack } from "../lib/lambda-aoss";
+import { S3DataSourceStack } from "../lib/s3-data-source";
 
 const ACCOUNT = process.env.CDK_DEFAULT_ACCOUNT;
 
 // create cdk app
 const app = new cdk.App();
 
-// create amazon opensearch collection
-const aoss = new AOSSStack(app, "AmazonOpenSearchStack", {
+// amazon opensearch serverless collection
+new AOSSStack(app, "AossStack", {
   name: "demo",
-  arnPrincipal: ARN_PRINCIPAL_ACCESS_AOSS,
+  arnPrincipal: PARTICIPANT_ROLE_ARN,
 });
 
-// create lambda indexing aoss collection
-new LambdaAossStack(app, "LambdaAossBedrockStack", {
-  opensearchDomain: AOSS_DOMAIN,
-  aossCollectionArn: AOSS_COLLECTION_ARN,
+// s3 data source and lambda
+new S3DataSourceStack(app, "LambdaAossBedrockStack", {
   bucketName: BUCKET_NAME,
   aossIndexName: AOSS_INDEX_NAME,
+  opensearchDomain: AOSS_DOMAIN,
 });
 
 // create ecs cluster
@@ -55,7 +52,7 @@ new GoBedrockService(app, "GoBedrockService", {
   // for https
   certificate: "",
   ecrRepoName: ECR_REPO_NAME,
-  aossCollectionArn: AOSS_ARN,
+  aossCollectionArn: AOSS_COLLECTION_ARN,
   bucketArn: BUCKET_ARN,
   env: {
     region: REGION,

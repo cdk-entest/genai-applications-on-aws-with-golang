@@ -1,14 +1,10 @@
-import {
-  aws_ec2,
-  aws_ecr,
-  aws_ecs,
-  aws_elasticloadbalancingv2,
-  aws_iam,
-  Duration,
-  Stack,
-  StackProps,
-} from "aws-cdk-lib";
-import { ListenerCertificate } from "aws-cdk-lib/aws-elasticloadbalancingv2";
+import { Duration, Stack, StackProps } from "aws-cdk-lib";
+// import { ListenerCertificate } from "aws-cdk-lib/aws-elasticloadbalancingv2";
+import * as aws_ec2 from "aws-cdk-lib/aws-ec2";
+import * as aws_ecr from "aws-cdk-lib/aws-ecr";
+import * as aws_ecs from "aws-cdk-lib/aws-ecs";
+import * as aws_iam from "aws-cdk-lib/aws-iam";
+import * as aws_elasticloadbalancingv2 from "aws-cdk-lib/aws-elasticloadbalancingv2";
 import { Effect } from "aws-cdk-lib/aws-iam";
 import { Construct } from "constructs";
 
@@ -18,7 +14,7 @@ interface GotBedrockProps extends StackProps {
   certificate: string;
   vpcId: string;
   vpcName: string;
-  aossCollectionArn: string;
+  aossCollectionArn?: string;
   bucketArn: string;
 }
 
@@ -89,7 +85,7 @@ export class GoBedrockService extends Stack {
     task.addToTaskRolePolicy(
       new aws_iam.PolicyStatement({
         effect: Effect.ALLOW,
-        resources: [props.aossCollectionArn],
+        resources: [`arn:aws:aoss:${this.region}:${this.account}:collection/*`],
         actions: ["aoss:APIAccessAll"],
       })
     );

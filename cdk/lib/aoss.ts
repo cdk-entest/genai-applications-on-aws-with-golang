@@ -1,5 +1,6 @@
-import { Stack, StackProps, aws_opensearchserverless } from "aws-cdk-lib";
+import { Stack, StackProps } from "aws-cdk-lib";
 import { Construct } from "constructs";
+import * as aws_opensearchserverless from "aws-cdk-lib/aws-opensearchserverless";
 import * as fs from "fs";
 import * as path from "path";
 
@@ -41,6 +42,10 @@ export class AOSSStack extends Stack {
   constructor(scope: Construct, id: string, props: AOSSProps) {
     super(scope, id, props);
 
+    const strAccessPolicyInline = `
+[{"Description":"Rule 1","Rules":[{"ResourceType":"collection","Resource":["collection/demo"],"Permission":["aoss:CreateCollectionItems","aoss:DeleteCollectionItems","aoss:UpdateCollectionItems","aoss:DescribeCollectionItems"]},{"ResourceType":"index","Resource":["index/demo/*"],"Permission":["aoss:CreateIndex","aoss:DeleteIndex","aoss:UpdateIndex","aoss:DescribeIndex","aoss:ReadDocument","aoss:WriteDocument"]}],"Principal":["${props.arnPrincipal}"]}]
+`;
+
     const collection = new aws_opensearchserverless.CfnCollection(
       this,
       props.name,
@@ -59,7 +64,7 @@ export class AOSSStack extends Stack {
         name: "demo-access-policy",
         type: "data",
         description: "access policy demo",
-        policy: strAccessPolicy,
+        policy: strAccessPolicyInline,
       }
     );
 
