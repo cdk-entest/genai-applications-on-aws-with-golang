@@ -94,12 +94,12 @@ func QueryAOSS(vec []float64, AOSSClient *opensearch.Client) ([]string, error) {
 		return []string{"nil"}, nil
 	}
 
-	// extract hint text only
+	// extract hit text only
 	hits := []string{}
 
 	for k, v := range answer.Hits.Hits {
 
-		if k > 0 {
+		if k >= 0 {
 			hits = append(hits, v["_source"].(map[string]interface{})["text"].(string))
 		}
 

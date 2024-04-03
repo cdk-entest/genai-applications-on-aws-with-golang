@@ -4,7 +4,9 @@
     "Rules": [
       {
         "ResourceType": "collection",
-        "Resource": ["collection/demo"],
+        "Resource": [
+          "collection/demo"
+        ],
         "Permission": [
           "aoss:CreateCollectionItems",
           "aoss:DeleteCollectionItems",
@@ -14,7 +16,9 @@
       },
       {
         "ResourceType": "index",
-        "Resource": ["index/demo/*"],
+        "Resource": [
+          "index/demo/*"
+        ],
         "Permission": [
           "aoss:CreateIndex",
           "aoss:DeleteIndex",
@@ -25,6 +29,8 @@
         ]
       }
     ],
-    "Principal": [""]
+    "Principal": [
+      "arn:aws:sts::111222333444:assumed-role/WSParticipantRole/Participant"
+    ]
   }
 ]
