@@ -12,4 +12,3 @@ export const AOSS_INDEX_NAME = "demo";
 
 //
 export const AOSS_DOMAIN = "g8ck7h4otcc53z2mhmee.us-west-2.aoss.amazonaws.com";
-export const AOSS_COLLECTION_ARN = "";

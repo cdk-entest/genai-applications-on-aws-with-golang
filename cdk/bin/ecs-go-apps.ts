@@ -28,7 +28,7 @@ new AOSSStack(app, "AossStack", {
 });
 
 // s3 data source and lambda
-new S3DataSourceStack(app, "LambdaAossBedrockStack", {
+new S3DataSourceStack(app, "S3DataSourceStack", {
   bucketName: BUCKET_NAME,
   aossIndexName: AOSS_INDEX_NAME,
   opensearchDomain: AOSS_DOMAIN,
