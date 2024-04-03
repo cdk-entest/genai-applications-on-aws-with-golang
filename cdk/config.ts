@@ -10,5 +10,5 @@ export const ECR_REPO_NAME = "go-bedrock-app";
 export const PARTICIPANT_ROLE_ARN = "";
 export const AOSS_INDEX_NAME = "demo";
 
-//
-export const AOSS_DOMAIN = "g8ck7h4otcc53z2mhmee.us-west-2.aoss.amazonaws.com";
+// please update
+export const AOSS_DOMAIN = "$AOSS_ID.us-west-2.aoss.amazonaws.com";
