@@ -15,7 +15,7 @@ interface GotBedrockProps extends StackProps {
   vpcId: string;
   vpcName: string;
   aossCollectionArn?: string;
-  bucketArn: string;
+  bucketName: string;
 }
 
 export class GoBedrockService extends Stack {
@@ -76,7 +76,7 @@ export class GoBedrockService extends Stack {
     task.addToTaskRolePolicy(
       new aws_iam.PolicyStatement({
         effect: Effect.ALLOW,
-        resources: [`${props.bucketArn}/*`],
+        resources: [`arn:aws:s3:::${props.bucketName}-${this.region}`],
         actions: ["s3:*GetObject", "s3:PutObject"],
       })
     );

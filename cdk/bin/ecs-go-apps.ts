@@ -6,7 +6,6 @@ import {
   REGION,
   ECR_REPO_NAME,
   BUCKET_NAME,
-  BUCKET_ARN,
   PARTICIPANT_ROLE_ARN,
   AOSS_DOMAIN,
   AOSS_INDEX_NAME,
@@ -51,7 +50,7 @@ new GoBedrockService(app, "GoBedrockService", {
   // for https
   certificate: "",
   ecrRepoName: ECR_REPO_NAME,
-  bucketArn: BUCKET_ARN,
+  bucketName: BUCKET_NAME,
   env: {
     region: REGION,
     account: ACCOUNT,
