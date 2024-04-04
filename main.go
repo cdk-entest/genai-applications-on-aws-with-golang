@@ -28,7 +28,7 @@ func init() {
 
 	// load aws credentials from profile demo using config
 	awsCfg1, err := config.LoadDefaultConfig(context.Background(),
-		config.WithRegion("us-west-2"),
+		config.WithRegion(gobedrock.REGION),
 	)
 
 	if err != nil {
@@ -36,7 +36,7 @@ func init() {
 	}
 
 	awsCfg2, err := config.LoadDefaultConfig(context.Background(),
-		config.WithRegion("us-east-1"),
+		config.WithRegion(gobedrock.REGION),
 	)
 
 	if err != nil {
