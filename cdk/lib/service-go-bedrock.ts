@@ -76,8 +76,11 @@ export class GoBedrockService extends Stack {
     task.addToTaskRolePolicy(
       new aws_iam.PolicyStatement({
         effect: Effect.ALLOW,
-        resources: [`arn:aws:s3:::${props.bucketName}-${this.region}`],
-        actions: ["s3:*GetObject", "s3:PutObject"],
+        resources: [
+          `arn:aws:s3:::${props.bucketName}`,
+          `arn:aws:s3:::${props.bucketName}/*`,
+        ],
+        actions: ["s3:GetObject", "s3:PutObject"],
       })
     );
 

@@ -1,8 +1,8 @@
 import os
-import boto3
+# import boto3
 
 # parameters
-REGION = "ap-southeast-1"
+REGION = "us-west-2"
 ACCOUNT = os.popen("aws sts get-caller-identity | jq -r '.Account'").read().strip()
 
 # # delete all docker images
@@ -31,20 +31,20 @@ os.system(f"sudo docker push {ACCOUNT}.dkr.ecr.{REGION}.amazonaws.com/go-bedrock
 #
 
 
-def update_service():
-    """
-    update service
-    """
-    # cluster
-    ecs = boto3.client("ecs", region_name=REGION)
-    cluster = "EcsClusterForNextApps"
-    # update service
-    response = ecs.update_service(
-        cluster=cluster,
-        service="GoBedrockService-EcsGoBedrockService58C04B0E-GEO2cAZLcJZ3",
-        forceNewDeployment=True,
-    )
-    print(response)
+# def update_service():
+#     """
+#     update service
+#     """
+#     # cluster
+#     ecs = boto3.client("ecs", region_name=REGION)
+#     cluster = "EcsClusterForNextApps"
+#     # update service
+#     response = ecs.update_service(
+#         cluster=cluster,
+#         service="GoBedrockService-EcsGoBedrockService58C04B0E-GEO2cAZLcJZ3",
+#         forceNewDeployment=True,
+#     )
+#     print(response)
 
 
-update_service()
+# update_service()
