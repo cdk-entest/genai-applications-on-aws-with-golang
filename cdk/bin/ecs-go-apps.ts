@@ -10,7 +10,6 @@ import {
   PARTICIPANT_ROLE_ARN,
   AOSS_DOMAIN,
   AOSS_INDEX_NAME,
-  AOSS_COLLECTION_ARN,
 } from "../config";
 import { GoBedrockService } from "../lib/service-go-bedrock";
 import { AOSSStack } from "../lib/aoss";
@@ -52,7 +51,6 @@ new GoBedrockService(app, "GoBedrockService", {
   // for https
   certificate: "",
   ecrRepoName: ECR_REPO_NAME,
-  aossCollectionArn: AOSS_COLLECTION_ARN,
   bucketArn: BUCKET_ARN,
   env: {
     region: REGION,
