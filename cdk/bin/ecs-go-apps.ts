@@ -21,7 +21,7 @@ const ACCOUNT = process.env.CDK_DEFAULT_ACCOUNT;
 const app = new cdk.App();
 
 // amazon opensearch serverless collection
-new AmazonOpenSearchStack(app, "AossStack", {
+new AmazonOpenSearchStack(app, "AmazonOpenSearchStack", {
   name: "demo",
   arnPrincipal: PARTICIPANT_ROLE_ARN,
 });
