@@ -12,7 +12,7 @@ import {
   AOSS_INDEX_NAME,
 } from "../config";
 import { GoBedrockService } from "../lib/service-go-bedrock";
-import { AOSSStack } from "../lib/aoss";
+import { AmazonOpenSearchStack } from "../lib/aoss";
 import { S3DataSourceStack } from "../lib/s3-data-source";
 
 const ACCOUNT = process.env.CDK_DEFAULT_ACCOUNT;
@@ -21,7 +21,7 @@ const ACCOUNT = process.env.CDK_DEFAULT_ACCOUNT;
 const app = new cdk.App();
 
 // amazon opensearch serverless collection
-new AOSSStack(app, "AossStack", {
+new AmazonOpenSearchStack(app, "AossStack", {
   name: "demo",
   arnPrincipal: PARTICIPANT_ROLE_ARN,
 });

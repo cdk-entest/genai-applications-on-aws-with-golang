@@ -31,15 +31,15 @@ const strEncryptPolicy = JSON.stringify(
   )
 );
 
-interface AOSSProps extends StackProps {
+interface AmazonOpenSearchProps extends StackProps {
   arnPrincipal: string;
   name: string;
 }
 
-export class AOSSStack extends Stack {
+export class AmazonOpenSearchStack extends Stack {
   public readonly collection: aws_opensearchserverless.CfnCollection;
 
-  constructor(scope: Construct, id: string, props: AOSSProps) {
+  constructor(scope: Construct, id: string, props: AmazonOpenSearchProps) {
     super(scope, id, props);
 
     const strAccessPolicyInline = `
